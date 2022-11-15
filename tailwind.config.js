@@ -10,7 +10,11 @@ module.exports = {
     './app.vue'
   ],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        karla: ['Karla', 'sans-serif']
+      }
+    }
   },
   plugins: []
 }
