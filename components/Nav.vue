@@ -3,18 +3,20 @@ const colorMode = useColorMode()
 </script>
 
 <template>
-  <div>
-    <button
-      v-if="colorMode.value === 'light'"
-      @click="colorMode.preference = 'dark'"
-    >
-      Dark
-    </button>
-    <button
-      v-else
-      @click="colorMode.preference = 'light'"
-    >
-      Light
-    </button>
-  </div>
+  <header class="w-full h-16">
+    <div>
+      <button
+        v-if="colorMode.value === 'light'"
+        @click="colorMode.preference = 'dark'"
+      >
+        Dark
+      </button>
+      <button
+        v-else
+        @click="colorMode.preference = 'light'"
+      >
+        Light
+      </button>
+    </div>
+  </header>
 </template>
