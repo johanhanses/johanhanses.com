@@ -5,7 +5,7 @@ const githubURL = 'https://github.com/johanhanses'
 </script>
 
 <template>
-  <PageHeader>Johan Hanses</PageHeader>
+  <PageHeading>Johan Hanses</PageHeading>
   <Text>
     TypeScript/Frontend developer based in Falun, Sweden. Building HR-Tech at
     <NuxtLink
@@ -19,29 +19,26 @@ const githubURL = 'https://github.com/johanhanses'
     tooling, its server engine Nitro to mention something.
   </Text>
 
-  <div class="space-y-2">
-    <p>
-      <a
-        :href="`mailto:${mailURL}`"
-        class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
-        >Email</a
-      >
-    </p>
-    <p>
-      <NuxtLink
-        :to="linkedInURL"
-        class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
-      >
-        LinkedIn
-      </NuxtLink>
-    </p>
-    <p>
-      <NuxtLink
-        :to="githubURL"
-        class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
-      >
-        Github
-      </NuxtLink>
-    </p>
+  <div class="flex space-x-4">
+    <a
+      :href="`mailto:${mailURL}`"
+      class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
+    >
+      <Email />
+    </a>
+
+    <NuxtLink
+      :to="linkedInURL"
+      class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
+    >
+      <LinkedIn />
+    </NuxtLink>
+
+    <NuxtLink
+      :to="githubURL"
+      class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
+    >
+      <Github />
+    </NuxtLink>
   </div>
 </template>

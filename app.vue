@@ -1,8 +1,7 @@
 <script setup lang="ts">
 useHead({
   title: 'Home',
-  titleTemplate: (title: string) =>
-    title ? `${title} - Johan Hanses` : 'Johan Hanses'
+  titleTemplate: (title) => (title ? `${title} - Johan Hanses` : 'Johan Hanses')
 })
 </script>
 
