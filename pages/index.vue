@@ -21,7 +21,7 @@ const githubURL = 'https://github.com/johanhanses'
 
   <div class="flex space-x-4">
     <a
-      :href="`mailto:${mailURL}`"
+      :href="mailURL"
       class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
     >
       <Email />
