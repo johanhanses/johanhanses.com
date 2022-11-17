@@ -22,6 +22,7 @@ const githubURL = 'https://github.com/johanhanses'
   <div class="flex space-x-4">
     <a
       :href="mailURL"
+      target="_blank"
       class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
     >
       <Email />
@@ -29,6 +30,7 @@ const githubURL = 'https://github.com/johanhanses'
 
     <NuxtLink
       :to="linkedInURL"
+      target="_blank"
       class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
     >
       <LinkedIn />
@@ -36,6 +38,7 @@ const githubURL = 'https://github.com/johanhanses'
 
     <NuxtLink
       :to="githubURL"
+      target="_blank"
       class="underline hover:text-zinc-900 hover:dark:text-zinc-100"
     >
       <Github />
