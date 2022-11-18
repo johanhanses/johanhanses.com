@@ -9,8 +9,7 @@
       Workly
     </NuxtLink>
     using TypeScript, Nextjs and React Native. Interested in Cloud/Platform
-    engineering and very passionated/obsessed about Nuxt3 and all its new
-    tooling, its server engine Nitro to mention something.
+    engineering a11y and very passionated/obsessed about Nuxt 3.
   </Text>
   <SocialList />
 </template>
