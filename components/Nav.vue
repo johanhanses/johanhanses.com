@@ -8,12 +8,14 @@ const colorMode = useColorMode()
       <div class="pt-[1px]">
         <button
           v-if="colorMode.value === 'light'"
+          aria-label="Set color mode to dark"
           @click="colorMode.preference = 'dark'"
         >
           <Moon />
         </button>
         <button
           v-else
+          aria-label="Set color mode to light"
           @click="colorMode.preference = 'light'"
         >
           <Sun />
