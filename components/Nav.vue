@@ -31,6 +31,6 @@ const colorMode = useColorMode()
     </div>
     <hr
       class="border border-dotted border-b-transparent border-x-transparent dark:border-zinc-300/10 border-zinc-800/10 my-6"
-    />
+    >
   </header>
 </template>

@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    ".vscode/": true,
+  },
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

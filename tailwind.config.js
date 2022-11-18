@@ -7,14 +7,14 @@ module.exports = {
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
     './nuxt.config.{js,ts}',
-    './app.vue'
+    './app.vue',
   ],
   theme: {
     extend: {
       fontFamily: {
-        karla: ['Karla', 'sans-serif']
-      }
-    }
+        karla: ['Karla', 'sans-serif'],
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 }
