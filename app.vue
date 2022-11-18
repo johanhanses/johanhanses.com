@@ -3,6 +3,10 @@ useHead({
   title: 'Home',
   titleTemplate: title => (title ? `${title} - Johan Hanses` : 'Johan Hanses'),
   htmlAttrs: { lang: 'en' },
+  meta: [
+    { name: 'description', content: 'Home of Johan Hanses, TypeScripter.' },
+    { property: 'og:description', content: 'Home of Johan Hanses, TypeScripter.' },
+  ],
 })
 </script>
 
