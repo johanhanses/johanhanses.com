@@ -20,6 +20,9 @@ useHead({
         <main>
           <NuxtPage />
         </main>
+        <footer class="text-zinc-400 dark:text-zinc-700 text-sm absolute bottom-0">
+          Built using Nuxt 3, TypeScript and Vercel
+        </footer>
       </div>
     </section>
   </div>
