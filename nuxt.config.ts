@@ -7,17 +7,17 @@ export default defineNuxtConfig({
     inject: true,
     download: true,
     families: {
-      Karla: [300, 400, 500, 600, 700]
-    }
+      Karla: [300, 400, 500, 600, 700],
+    },
   },
   colorMode: {
-    classSuffix: ''
+    classSuffix: '',
   },
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
       tailwindcss: {},
-      autoprefixer: {}
-    }
-  }
+      autoprefixer: {},
+    },
+  },
 })
