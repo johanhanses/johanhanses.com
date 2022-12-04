@@ -4,11 +4,12 @@ const colorMode = useColorMode()
 
 <template>
   <header class="w-full">
-    <div class="flex space-x-6 h-full">
-      <div class="pt-[1px]">
+    <div class="flex space-x-6 h-full text-lg items-center">
+      <div class="mt-0.5">
         <button
           v-if="colorMode.value === 'light'"
           aria-label="Set color mode to dark"
+          class="hover:bg-zinc-200 px-4 py-1 rounded-md"
           @click="colorMode.preference = 'dark'"
         >
           <Moon />
@@ -16,6 +17,7 @@ const colorMode = useColorMode()
         <button
           v-else
           aria-label="Set color mode to light"
+          class="hover:bg-zinc-700 px-4 py-1 rounded-md"
           @click="colorMode.preference = 'light'"
         >
           <Sun />
@@ -25,7 +27,7 @@ const colorMode = useColorMode()
         <NuxtLink
           to="https://cv.johanhanses.com"
           target="_blank"
-          class="hover:underline hover:text-zinc-900 hover:dark:text-zinc-100 text-lg"
+          class="hover:bg-zinc-200 hover:dark:bg-zinc-700 px-4 py-1 rounded-md transition-colors duration-300"
         >
           CV
         </NuxtLink>
