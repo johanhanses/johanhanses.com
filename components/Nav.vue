@@ -12,7 +12,7 @@ const colorMode = useColorMode()
           class="hover:bg-zinc-200 px-4 py-1 rounded-md"
           @click="colorMode.preference = 'dark'"
         >
-          <Moon />
+          <Sun />
         </button>
         <button
           v-if="colorMode.value === 'dark'"
@@ -20,7 +20,7 @@ const colorMode = useColorMode()
           class="hover:bg-zinc-700 px-4 py-1 rounded-md"
           @click="colorMode.preference = 'light'"
         >
-          <Sun />
+          <Moon />
         </button>
       </div>
       <nav>
