@@ -6,8 +6,11 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <main className="h-screen dark:bg-[#24273a] dark:text-[#cad3f5] text-[#4c4f69] bg-[#eff1f5] flex justify-center items-center">
-      <h1 className="text-xl">Hejsan</h1>
-    </main>
+    <div className="h-full max-w-screen-md mx-auto">
+      <h1 className="text-3xl font-serif mb-4">Johan Hanses</h1>
+
+      <p>Hi there!</p>
+      <p>I am a Software Engineer working with all things with JavaScript/TypeScript on both the server and browser.</p>
+    </div>
   )
 }

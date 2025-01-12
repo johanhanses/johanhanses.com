@@ -5,16 +5,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          '"Inter"',
-          'ui-sans-serif',
-          'system-ui',
-          'sans-serif',
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
-        ],
+        sans: ['"Karla"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['"Lora"', 'ui-serif', 'Georgia'],
+      },
+      colors: {
+        primary: '#a6da95',
+        secondary: '#f5a97f',
       },
     },
   },

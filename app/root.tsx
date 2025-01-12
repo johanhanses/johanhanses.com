@@ -12,7 +12,7 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap',
   },
   { rel: 'stylesheet', href: stylesheet },
 ]
@@ -38,9 +38,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <div>
+    <div className="h-screen dark:bg-[#24273a] dark:text-[#cad3f5] text-[#4c4f69] bg-[#eff1f5] font-sans">
       <Header />
-      <main className="">
+
+      <main className="mt-16">
         <Outlet />
       </main>
     </div>
