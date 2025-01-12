@@ -4,4 +4,8 @@
 # React Router
 /.react-router/
 /build/
+
 .env
+
+# Database
+data/sqlite.db
