@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cross-env NODE_ENV=production react-router build",
-    "dev": "react-router dev",
-    "start": "cross-env NODE_ENV=production react-router-serve ./build/server/index.js",
+    "build": "cross-env NODE_OPTIONS=--experimental-sqlite NODE_ENV=production react-router build",
+    "dev": "NODE_OPTIONS=--experimental-sqlite react-router dev",
+    "start": "cross-env NODE_OPTIONS=--experimental-sqlite NODE_ENV=production react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@react-router/dev": "^7.1.1",
-    "@types/node": "^20",
+    "@types/node": "^22.10.5",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
     "autoprefixer": "^10.4.20",
@@ -28,5 +28,8 @@
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=22.5.0"
   }
 }

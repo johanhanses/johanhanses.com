@@ -15,8 +15,22 @@ WORKDIR /app
 RUN npm run build
 
 FROM node:20-alpine
+# Create app directory and set permissions
+RUN mkdir -p /app/data && \
+    chown -R node:node /app
+
+# Copy application files
 COPY ./package.json package-lock.json /app/
 COPY --from=production-dependencies-env /app/node_modules /app/node_modules
 COPY --from=build-env /app/build /app/build
+
+# Set working directory
 WORKDIR /app
+
+# Switch to non-root user
+USER node
+
+# Define volume for persistent data
+VOLUME ["/app/data"]
+
 CMD ["npm", "run", "start"]
