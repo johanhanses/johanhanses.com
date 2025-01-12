@@ -40,5 +40,5 @@ VOLUME ["/app/data"]
 ENV NODE_ENV=production \
     NODE_OPTIONS=--experimental-sqlite
 
-# Direct command without using npm script
-CMD ["react-router-serve", "./build/server/index.js"]
+# Direct command with full path to binary
+CMD ["./node_modules/.bin/react-router-serve", "./build/server/index.js"]
