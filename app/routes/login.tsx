@@ -1,4 +1,4 @@
-import { data, Form, redirect } from 'react-router'
+import { data, Form, redirect, useSearchParams } from 'react-router'
 import { verifyLogin } from '~/auth.server'
 import { createUserSession, getUserId } from '~/session.server'
 import type { Route } from './+types/login'
@@ -14,7 +14,7 @@ export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData()
   const username = formData.get('username')
   const password = formData.get('password')
-  const redirectTo = formData.get('redirectTo') || '/'
+  const redirectTo = formData.get('redirectTo')
 
   if (typeof username !== 'string' || typeof password !== 'string' || typeof redirectTo !== 'string') {
     return data({ errors: { form: 'Invalid form data' } }, { status: 400 })
@@ -25,6 +25,7 @@ export async function action({ request }: Route.ActionArgs) {
     if (!user) {
       return data({ errors: { form: 'Invalid username or password' } }, { status: 400 })
     }
+    console.log("redirectTo", redirectTo);
 
     return createUserSession(user.id.toString(), redirectTo)
   } catch (error) {
@@ -34,6 +35,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export default function LoginPage({ actionData }: Route.ComponentProps) {
+  const [searchParams] = useSearchParams();
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full space-y-8">
@@ -42,6 +44,8 @@ export default function LoginPage({ actionData }: Route.ComponentProps) {
         </div>
 
         <Form method="post" className="mt-8 space-y-6">
+          <input type="hidden" name="redirectTo" value={searchParams.get('redirectTo') || '/'} />
+
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label htmlFor="username" className="sr-only">
