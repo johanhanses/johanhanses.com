@@ -36,4 +36,9 @@ USER node
 # Define volume for persistent data
 VOLUME ["/app/data"]
 
-CMD ["npm", "run", "start"]
+# Set environment variables
+ENV NODE_ENV=production \
+    NODE_OPTIONS=--experimental-sqlite
+
+# Direct command without using npm script
+CMD ["react-router-serve", "./build/server/index.js"]
