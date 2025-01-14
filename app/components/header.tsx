@@ -2,7 +2,7 @@ import { NavLink } from 'react-router'
 
 export function Header() {
   return (
-    <header className="max-w-screen-md mx-auto">
+    <header className="max-w-screen-md mx-auto px-6 lg:px-4">
       <div className="flex justify-between items-center h-16 text-lg">
         <nav className="flex space-x-4">
           <NavLink

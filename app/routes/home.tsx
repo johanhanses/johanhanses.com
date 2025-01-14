@@ -19,17 +19,36 @@ const fadeIn = {
 
 export default function Home() {
   return (
-    <div className="h-full max-w-screen-md mx-auto">
-      <motion.h1 className="text-3xl font-serif mb-4" {...fadeInUp}>
+    <div className="h-full">
+      <motion.h1 className="text-3xl font-serif mb-8" {...fadeInUp}>
         Johan Hanses
       </motion.h1>
 
-      <motion.div className="leading-relaxed space-y-2" {...fadeIn}>
+      <motion.div className="mb-8 leading-relaxed space-y-2" {...fadeIn}>
         <p>Hi there!</p>
         <p>
           I am a Software Engineer building dynamic, custom data visuals, web and mobile apps using D3 and all things
           JavaScript/TypeScript on both the server and browser.
         </p>
+        <p>
+          Loves to tinker with terminal tooling and geeks out about all things Linux, currently toying with NixOS again
+          and interested in all things backend and devops.
+        </p>
+      </motion.div>
+
+      <motion.div {...fadeInUp}>
+        {/* three button with links to linkedin, github and a mailto  */}
+        <a href="https://www.linkedin.com/in/johanhanses/" className="text-primary hover:underline" target="_blank">
+          LinkedIn
+        </a>
+        <span className="mx-2">•</span>
+        <a href="https://github.com/johanhanses" className="text-primary hover:underline" target="_blank">
+          GitHub
+        </a>
+        <span className="mx-2">•</span>
+        <a href="mailto:johanhanses@gmail.com" className="text-primary hover:underline">
+          Email
+        </a>
       </motion.div>
     </div>
   )
