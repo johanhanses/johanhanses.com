@@ -23,6 +23,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            if (window.localStorage.getItem('theme') === 'dark') {
+              document.documentElement.classList.add('dark');
+            }
+          `,
+          }}
+        />
+
         <Meta />
         <Links />
       </head>
@@ -38,7 +49,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <div className="min-h-screen dark:bg-[#24273a] dark:text-[#cad3f5] text-[#4c4f69] bg-[#eff1f5] font-sans">
+    <div className="min-h-screen dark:bg-[#24273a] dark:text-[#cad3f5] text-[#4c4f69] bg-[#eff1f5] font-sans pb-6">
       <Header />
 
       <main className="mt-16 px-6 lg:px-4 max-w-screen-md mx-auto">
