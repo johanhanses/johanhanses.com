@@ -38,7 +38,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <div className="h-screen dark:bg-[#24273a] dark:text-[#cad3f5] text-[#4c4f69] bg-[#eff1f5] font-sans">
+    <div className="min-h-screen dark:bg-[#24273a] dark:text-[#cad3f5] text-[#4c4f69] bg-[#eff1f5] font-sans">
       <Header />
 
       <main className="mt-16 px-6 lg:px-4 max-w-screen-md mx-auto">
