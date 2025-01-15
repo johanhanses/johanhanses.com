@@ -1,24 +1,34 @@
 import { NavLink } from 'react-router'
+import { Terminal } from './terminal'
 
 export function Header() {
   return (
     <header className="max-w-screen-md mx-auto px-6 lg:px-4">
-      <div className="flex justify-between items-center h-16 text-lg">
+      <div className="flex items-center h-16 text-lg gap-6">
+        <Terminal className="w-5 h-5" />
+
         <nav className="flex space-x-4">
           <NavLink
             to="/"
-            className={({ isActive }) => (isActive ? 'text-primary border-primary border-b-2' : 'hover:text-primary')}
+            className={({ isActive }) =>
+              isActive
+                ? 'text-lightPrimary dark:text-darkPrimary border-lightPrimary dark:border-darkPrimary border-b-2'
+                : 'hover:text-lightPrimary dark:hover:text-darkPrimary'
+            }
           >
             Home
           </NavLink>
           <NavLink
             to="/protected"
-            className={({ isActive }) => (isActive ? 'text-primary border-primary border-b-2' : 'hover:text-primary')}
+            className={({ isActive }) =>
+              isActive
+                ? 'text-lightPrimary dark:text-darkPrimary border-lightPrimary dark:border-darkPrimary border-b-2'
+                : 'hover:text-lightPrimary dark:hover:text-darkPrimary'
+            }
           >
             Protected Page
           </NavLink>
         </nav>
-
         {/* <Form action="/logout" method="post">
           <button
             type="submit"

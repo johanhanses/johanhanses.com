@@ -9,8 +9,10 @@ export default {
         serif: ['"Lora"', 'ui-serif', 'Georgia'],
       },
       colors: {
-        primary: '#a6da95',
-        secondary: '#f5a97f',
+        darkPrimary: '#a6da95',
+        darkSecondary: '#f5a97f',
+        lightPrimary: '#40a02b',
+        lightSecondary: '#ef9f76',
       },
     },
   },

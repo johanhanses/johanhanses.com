@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import { Github } from '~/components/github'
+import { Linkedin } from '~/components/linkedin'
+import { Mail } from '~/components/mail'
 import type { Route } from './+types/home'
 
 export function meta({}: Route.MetaArgs) {
@@ -36,17 +39,21 @@ export default function Home() {
         </p>
       </motion.div>
 
-      <motion.div {...fadeInUp}>
-        {/* three button with links to linkedin, github and a mailto  */}
-        <a href="https://www.linkedin.com/in/johanhanses/" className="text-primary hover:underline" target="_blank">
+      <motion.div className="flex gap-6 text-lightPrimary dark:text-darkPrimary" {...fadeInUp}>
+        <a
+          href="https://www.linkedin.com/in/johanhanses/"
+          className="hover:underline flex items-center gap-2"
+          target="_blank"
+        >
+          <Linkedin className="w-4 h-4" />
           LinkedIn
         </a>
-        <span className="mx-2">•</span>
-        <a href="https://github.com/johanhanses" className="text-primary hover:underline" target="_blank">
+        <a href="https://github.com/johanhanses" className="hover:underline flex items-center gap-2" target="_blank">
+          <Github className="w-4 h-4" />
           GitHub
         </a>
-        <span className="mx-2">•</span>
-        <a href="mailto:johanhanses@gmail.com" className="text-primary hover:underline">
+        <a href="mailto:johanhanses@gmail.com" className="hover:underline flex items-center gap-2">
+          <Mail className="w-4 h-4" />
           Email
         </a>
       </motion.div>
