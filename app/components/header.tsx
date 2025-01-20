@@ -1,47 +1,73 @@
-import { NavLink } from 'react-router'
+import { Form, NavLink } from 'react-router'
 import { Terminal } from './terminal'
 import { ThemeToggler } from './theme-toggler'
 
-export function Header() {
+export function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
-    <header className="max-w-screen-md mx-auto px-6 lg:px-4 text-lg">
-      <div className="flex items-center h-16 justify-between">
+    <header className="mx-auto max-w-screen-md px-6 text-lg lg:px-4">
+      <div className="flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
-          <Terminal className="w-5 h-5" />
+          <Terminal className="h-5 w-5" />
 
           <nav className="flex space-x-4">
             <NavLink
               to="/"
               className={({ isActive }) =>
                 isActive
-                  ? 'text-lightPrimary dark:text-darkPrimary border-lightPrimary dark:border-darkPrimary border-b-2'
+                  ? 'border-b-2 border-lightPrimary text-lightPrimary dark:border-darkPrimary dark:text-darkPrimary'
                   : 'hover:text-lightPrimary dark:hover:text-darkPrimary'
               }
             >
               Home
             </NavLink>
-            <NavLink
-              to="/protected"
-              className={({ isActive }) =>
-                isActive
-                  ? 'text-lightPrimary dark:text-darkPrimary border-lightPrimary dark:border-darkPrimary border-b-2'
-                  : 'hover:text-lightPrimary dark:hover:text-darkPrimary'
-              }
-            >
-              Protected Page
-            </NavLink>
+
+            {isLoggedIn ? (
+              <>
+                <NavLink
+                  to="/cover-letter"
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'border-b-2 border-lightPrimary text-lightPrimary dark:border-darkPrimary dark:text-darkPrimary'
+                      : 'hover:text-lightPrimary dark:hover:text-darkPrimary'
+                  }
+                >
+                  Cover Letter
+                </NavLink>
+
+                <NavLink
+                  to="/cv"
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'border-b-2 border-lightPrimary text-lightPrimary dark:border-darkPrimary dark:text-darkPrimary'
+                      : 'hover:text-lightPrimary dark:hover:text-darkPrimary'
+                  }
+                >
+                  CV
+                </NavLink>
+              </>
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'border-b-2 border-lightPrimary text-lightPrimary dark:border-darkPrimary dark:text-darkPrimary'
+                    : 'hover:text-lightPrimary dark:hover:text-darkPrimary'
+                }
+              >
+                Login
+              </NavLink>
+            )}
           </nav>
         </div>
 
-        <div>
-          {/* <Form action="/logout" method="post">
-          <button
-            type="submit"
-            className="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
-          >
-            Logout
-          </button>
-        </Form> */}
+        <div className="flex items-center gap-4">
+          {isLoggedIn && (
+            <Form action="/logout" method="post">
+              <button type="submit" className="hover:text-lightPrimary dark:hover:text-darkPrimary">
+                Logout
+              </button>
+            </Form>
+          )}
           <ThemeToggler />
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { createCookieSessionStorage, redirect } from 'react-router'
 
 const sessionSecret = process.env.SESSION_SECRET
+
 if (!sessionSecret) {
   throw new Error('SESSION_SECRET must be set')
 }
@@ -20,8 +21,6 @@ const storage = createCookieSessionStorage({
 export async function createUserSession(userId: string, redirectTo: string) {
   const session = await storage.getSession()
   session.set('userId', userId)
-
-  console.log("redirectTo", redirectTo)
 
   return redirect(redirectTo, {
     headers: {
@@ -45,6 +44,7 @@ export async function getUserId(request: Request) {
 
 export async function requireUserId(request: Request, redirectTo: string = new URL(request.url).pathname) {
   const session = await getUserSession(request)
+
   const userId = session.get('userId')
 
   if (!userId || typeof userId !== 'string') {
@@ -58,7 +58,7 @@ export async function requireUserId(request: Request, redirectTo: string = new U
 export async function logout(request: Request) {
   const session = await storage.getSession(request.headers.get('Cookie'))
 
-  return redirect('/login', {
+  return redirect('/', {
     headers: {
       'Set-Cookie': await storage.destroySession(session),
     },

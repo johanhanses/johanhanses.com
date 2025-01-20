@@ -2,6 +2,7 @@ import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration }
 import type { Route } from './+types/root'
 import stylesheet from './app.css?url'
 import { Header } from './components/header'
+import { getUserSession } from './session.server'
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -47,10 +48,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
   )
 }
 
-export default function App() {
+export const loader = async ({ request }: Route.LoaderArgs) => {
+  return (await getUserSession(request)).data.userId !== undefined
+}
+
+export default function App({ loaderData }: Route.ComponentProps) {
+  const isLoggedIn = loaderData
+
   return (
     <div className="min-h-screen dark:bg-[#24273a] dark:text-[#cad3f5] text-[#4c4f69] bg-[#eff1f5] font-sans pb-6">
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
 
       <main className="mt-16 px-6 lg:px-4 max-w-screen-md mx-auto">
         <Outlet />

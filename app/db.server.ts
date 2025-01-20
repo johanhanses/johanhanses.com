@@ -15,7 +15,9 @@ async function ensureDbDirectory() {
     // Test write permissions
     try {
       await access(dbPath, constants.W_OK)
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch {
+      // eslint-disable-next-line no-console
       console.error(`No write permission to ${dbPath}`)
       throw new Error(`Database directory ${dbPath} is not writable`)
     }
@@ -26,11 +28,13 @@ async function ensureDbDirectory() {
       await access(dbFile, constants.W_OK)
     } catch (error) {
       if (error && typeof error === 'object' && 'code' in error && error.code !== 'ENOENT') {
+        // eslint-disable-next-line no-console
         console.error(`No write permission to ${dbFile}`)
         throw new Error(`Database file ${dbFile} is not writable`)
       }
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Database initialization error:', error)
     throw error
   }

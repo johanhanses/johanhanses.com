@@ -23,6 +23,7 @@ export async function createUser(username: string, password: string) {
   try {
     const result = stmt.run(username, passwordHash)
     return result.lastInsertRowid
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // SQLite constraint error
     if (error.message?.includes('UNIQUE constraint failed')) {

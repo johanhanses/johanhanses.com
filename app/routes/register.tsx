@@ -1,6 +1,5 @@
 import { data } from 'react-router'
 // import { createUser } from '~/auth.server'
-import type { Route } from './+types/register'
 
 // export async function action({ request }: Route.ActionArgs) {
 //   if (request.method !== 'POST') {
@@ -30,6 +29,6 @@ import type { Route } from './+types/register'
 //   }
 // }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action() {
   return data({ message: 'Hello, slang!' })
 }
