@@ -56,10 +56,10 @@ export default function App({ loaderData }: Route.ComponentProps) {
   const isLoggedIn = loaderData
 
   return (
-    <div className="min-h-screen dark:bg-[#24273a] dark:text-[#cad3f5] text-[#4c4f69] bg-[#eff1f5] font-sans pb-6">
+    <div className="min-h-screen bg-[#eff1f5] pb-6 font-sans text-[#4c4f69] dark:bg-[#24273a] dark:text-[#cad3f5]">
       <Header isLoggedIn={isLoggedIn} />
 
-      <main className="mt-16 px-6 lg:px-4 max-w-screen-md mx-auto">
+      <main className="mx-auto mt-16 max-w-screen-md px-6 lg:px-4">
         <Outlet />
       </main>
     </div>
@@ -80,12 +80,12 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
+    <main className="container mx-auto p-4 pt-16">
       <h1>{message}</h1>
       <p>{details}</p>
 
       {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
+        <pre className="w-full overflow-x-auto p-4">
           <code>{stack}</code>
         </pre>
       )}
