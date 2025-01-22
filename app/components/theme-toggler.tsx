@@ -20,7 +20,7 @@ export function ThemeToggler() {
   return (
     <button
       onClick={() => setIsDark(!isDark)}
-      className="dark:hover:bg-[#414559] hover:bg-[#ccd0da] w-8 h-8 rounded-md flex items-center justify-center transition-all"
+      className="flex h-8 w-8 items-center justify-center rounded-md transition-all hover:bg-[#ccd0da] dark:hover:bg-[#414559]"
     >
       {isDark ? <Moon className="" /> : <Sun className="" />}
       <span className="sr-only">Toggle theme</span>
