@@ -1,18 +1,20 @@
+import { getCv } from '~/cv.server'
 import { requireUserId } from '~/session.server'
-import type { Route } from './+types/cover-letter'
+import type { Route } from './+types/cv'
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const userId = await requireUserId(request)
-  return { userId }
+  await requireUserId(request)
+  const cv = await getCv()
+  return { cv }
 }
 
 export default function CVPage({ loaderData }: Route.ComponentProps) {
-  const { userId } = loaderData
+  const { cv } = loaderData
 
   return (
     <div className="mx-auto max-w-2xl">
       <h1 className="mb-8 font-serif text-2xl">CV</h1>
-      <p className="">Welcome, {userId}! This is a another protected page that only authenticated users can see.</p>
+      <div className="">{cv ? JSON.stringify(cv.content, null, 2) : <p>No CV found</p>}</div>
     </div>
   )
 }

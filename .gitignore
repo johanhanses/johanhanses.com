@@ -9,3 +9,6 @@
 
 # Database
 data/sqlite.db
+
+cv.json
+cover-letter.txt

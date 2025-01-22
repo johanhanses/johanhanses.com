@@ -1,4 +1,5 @@
 import { createCookieSessionStorage, redirect } from 'react-router'
+import { getUserById } from './auth.server'
 
 const sessionSecret = process.env.SESSION_SECRET
 
@@ -53,6 +54,15 @@ export async function requireUserId(request: Request, redirectTo: string = new U
   }
 
   return userId
+}
+
+export async function getUsername(request: Request) {
+  const userId = await getUserId(request)
+
+  if (!userId) return null
+
+  const user = await getUserById(parseInt(userId))
+  return user?.username || null
 }
 
 export async function logout(request: Request) {

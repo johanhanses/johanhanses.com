@@ -49,7 +49,7 @@ async function initDb() {
     enableForeignKeyConstraints: true,
   })
 
-  // Create users table if it doesn't exist
+  // Create tables if they don't exist
   db.exec(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -57,7 +57,24 @@ async function initDb() {
       password_hash TEXT NOT NULL,
       created_at TEXT DEFAULT (datetime('now')),
       updated_at TEXT DEFAULT (datetime('now'))
-    ) STRICT
+    ) STRICT;
+
+    CREATE TABLE IF NOT EXISTS cover_letter (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      content TEXT NOT NULL,
+      created_at TEXT DEFAULT (datetime('now')),
+      updated_at TEXT DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    ) STRICT;
+
+    CREATE TABLE IF NOT EXISTS cv (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      content TEXT NOT NULL, -- Store JSON as TEXT
+      created_at TEXT DEFAULT (datetime('now')),
+      updated_at TEXT DEFAULT (datetime('now'))
+    ) STRICT;
   `)
 
   return db
@@ -66,6 +83,8 @@ async function initDb() {
 export async function getDb() {
   if (!db) {
     db = await initDb()
+    // eslint-disable-next-line no-console
+    console.log('Database initialized')
   }
   return db
 }
