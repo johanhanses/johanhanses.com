@@ -19,28 +19,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Update system
-            sudo apt update && sudo apt upgrade -y
-
-             # Install SQLite3 and dev headers
-            sudo apt install -y sqlite3 libsqlite3-dev
-
-            # Ensure Docker is installed
-            if ! command -v docker &> /dev/null; then
-              curl -fsSL https://get.docker.com -o get-docker.sh
-              sudo sh get-docker.sh
-              sudo usermod -aG docker $USER
-            fi
-
-            # Ensure Docker Compose is installed
-            if ! command -v docker compose &> /dev/null; then
-              sudo apt install -y docker-compose-plugin
-            fi
-
-            # Create app directory if it doesn't exist
-            sudo mkdir -p /opt/johanhanses
-            sudo chown $USER:$USER /opt/johanhanses
-
             # Navigate to app directory
             cd /opt/johanhanses
 
