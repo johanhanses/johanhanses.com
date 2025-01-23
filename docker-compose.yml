@@ -10,6 +10,11 @@ services:
       - app_data:/app/data
     networks:
       - web
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
 
   nginx:
     image: nginx:alpine
@@ -24,7 +29,8 @@ services:
     networks:
       - web
     depends_on:
-      - app
+      app:
+        condition: service_healthy
 
   certbot:
     image: certbot/certbot
@@ -33,11 +39,16 @@ services:
       - certbot_www:/var/www/certbot
     depends_on:
       - nginx
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
   app_data:
+    name: johanhanses_app_data
   certbot_certs:
+    name: johanhanses_certbot_certs
   certbot_www:
+    name: johanhanses_certbot_www
 
 networks:
   web:
+    name: johanhanses_web
