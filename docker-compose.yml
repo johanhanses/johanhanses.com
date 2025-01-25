@@ -9,6 +9,8 @@ services:
       - SESSION_SECRET=${SESSION_SECRET}
     volumes:
       - sqlite_data:/app/data
+    ports:
+      - "9000:9000"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
       interval: 30s
