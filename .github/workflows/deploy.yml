@@ -10,6 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create .env file
+        run: |
+          echo "SESSION_SECRET=${{ secrets.SESSION_SECRET }}" > .env
+
+
       - name: Create SSH directory
         run: mkdir -p ~/.ssh/
 
