@@ -9,6 +9,11 @@ services:
       - SESSION_SECRET=${SESSION_SECRET}
     volumes:
       - sqlite_data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
 
   nginx:
     image: nginx:alpine
@@ -21,6 +26,14 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - app
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    depends_on:
+      - nginx
 
 volumes:
   sqlite_data:
