@@ -17,23 +17,29 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Debug SSH connection
+        run: |
+          ssh -v johan@${{ secrets.SERVER_HOST }} 'echo "SSH connection successful"'
 
       - name: Create remote directories
         run: |
-          ssh johan@${{ secrets.SERVER_HOST }} '
+          ssh -i ~/.ssh/id_rsa johan@${{ secrets.SERVER_HOST }} '
             mkdir -p ~/app/certbot/conf
             mkdir -p ~/app/certbot/www
           '
 
       - name: Copy files to server
         run: |
-          scp -r docker-compose.yml nginx.conf Dockerfile .env johan@${{ secrets.SERVER_HOST }}:~/app/
-          rsync -av --exclude='node_modules' --exclude='.git' --exclude='build' . johan@${{ secrets.SERVER_HOST }}:~/app/
+          scp -i ~/.ssh/id_rsa -r docker-compose.yml nginx.conf Dockerfile .env johan@${{ secrets.SERVER_HOST }}:~/app/
+          rsync -av -e "ssh -i ~/.ssh/id_rsa" --exclude='node_modules' --exclude='.git' --exclude='build' . johan@${{ secrets.SERVER_HOST }}:~/app/
 
       - name: Deploy
         run: |
-          ssh johan@${{ secrets.SERVER_HOST }} '
+          ssh -i ~/.ssh/id_rsa johan@${{ secrets.SERVER_HOST }} '
             cd ~/app
             docker compose pull
             docker compose down
