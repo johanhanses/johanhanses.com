@@ -7,37 +7,41 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            # Navigate to app directory
-            cd /opt/johanhanses
+      - name: Create SSH directory
+        run: mkdir -p ~/.ssh/
 
-            # Clone/pull repository
-            if [ -d "app" ]; then
-              cd app
-              git pull origin main
-            else
-              git clone https://github.com/johanhanses/johanhanses.com.git app
-              cd app
-            fi
+      - name: Install SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-            # Create .env file
-            echo "SESSION_SECRET=${{ secrets.SESSION_SECRET }}" > .env
+      - name: Create remote directories
+        run: |
+          ssh johan@${{ secrets.SERVER_HOST }} '
+            mkdir -p ~/app/certbot/conf
+            mkdir -p ~/app/certbot/www
+          '
 
-            # Build and start containers
+      - name: Copy files to server
+        run: |
+          scp -r docker-compose.yml nginx.conf Dockerfile .env johan@${{ secrets.SERVER_HOST }}:~/app/
+          rsync -av --exclude='node_modules' --exclude='.git' --exclude='build' . johan@${{ secrets.SERVER_HOST }}:~/app/
+
+      - name: Deploy
+        run: |
+          ssh johan@${{ secrets.SERVER_HOST }} '
+            cd ~/app
             docker compose pull
-            docker compose build --no-cache
-            docker compose up -d --force-recreate
+            docker compose down
+            docker compose up -d --build
+          '
 
-            # Cleanup
-            docker system prune -f
+      - name: Cleanup
+        run: rm -rf ~/.ssh
+
+    env:
+      SESSION_SECRET: ${{ secrets.SESSION_SECRET }}

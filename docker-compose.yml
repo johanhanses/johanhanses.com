@@ -1,15 +1,12 @@
 services:
   app:
     build: .
-    restart: unless-stopped
+    restart: always
     environment:
       - NODE_ENV=production
-      - PORT=3000
       - SESSION_SECRET=${SESSION_SECRET}
     volumes:
-      - app_data:/app/data
-    networks:
-      - web
+      - sqlite_data:/app/data
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
       interval: 30s
@@ -18,37 +15,23 @@ services:
 
   nginx:
     image: nginx:alpine
-    restart: unless-stopped
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - certbot_certs:/etc/letsencrypt:ro
-      - certbot_www:/var/www/certbot:ro
+    restart: always
     ports:
       - "80:80"
       - "443:443"
-    networks:
-      - web
-    depends_on:
-      app:
-        condition: service_healthy
-
-  certbot:
-    image: certbot/certbot
     volumes:
-      - certbot_certs:/etc/letsencrypt
-      - certbot_www:/var/www/certbot
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot:ro
     depends_on:
-      - nginx
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+      - app
+
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/www:/var/www/certbot
+  #   command: certonly --webroot -w /var/www/certbot --email johanhanses@gmail.com -d johanhanses.com -d www.johanhanses.com --agree-tos --no-eff-email
 
 volumes:
-  app_data:
-    name: johanhanses_app_data
-  certbot_certs:
-    name: johanhanses_certbot_certs
-  certbot_www:
-    name: johanhanses_certbot_www
-
-networks:
-  web:
-    name: johanhanses_web
+  sqlite_data:
