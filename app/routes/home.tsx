@@ -1,7 +1,7 @@
 import type { Route } from './+types/home'
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: 'New React Router App' }, { name: 'description', content: 'Welcome to React Router!' }]
+  return [{ title: 'johanhanses.com' }, { name: 'description', content: 'Home of Johan Hanses' }]
 }
 
 export function loader({ context }: Route.LoaderArgs) {
@@ -9,6 +9,8 @@ export function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
+  console.log(loaderData)
+
   return (
     <main className="flex items-center justify-center h-screen font-medium">
       <div className="flex flex-col gap-2">
